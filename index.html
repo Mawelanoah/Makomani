@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="theme-color" content="#0d0d0d">
+  <title>Mukomani | Chicken, Sphatlo, Hake & Fresh Bakery</title>
+  <meta name="description" content="Mukomani – Hot chicken, loaded sphatlo, crispy hake and fresh bakery. Order for collection on WhatsApp.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0d0d0d;
+      --card: #1a1a1a;
+      --red: #e6392e;
+      --red-dark: #c62d24;
+      --green: #25d366;
+      --text: #fff;
+      --muted: #a0a0a0;
+      --radius: 16px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      font-size: 15px;
+      padding-bottom: 90px;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+
+    /* HEADER */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(13,13,13,0.97);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px; max-width: 1100px; margin: 0 auto; padding: 0 16px;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .logo-circle {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: linear-gradient(135deg, #e6392e, #9b1b14);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 0.95rem; color: #fff;
+      border: 2px solid #fff;
+    }
+    .logo-text {
+      font-weight: 800; font-size: 1.15rem; letter-spacing: -0.3px;
+    }
+    .logo-text span { color: var(--red); }
+    .nav { display: none; gap: 24px; }
+    .nav a { font-weight: 500; font-size: 0.9rem; opacity: 0.85; transition: 0.2s; }
+    .nav a:hover, .nav a.active { opacity: 1; color: var(--red); }
+    .header-right { display: flex; align-items: center; gap: 10px; }
+    .wa-header {
+      background: var(--green); color: #fff; font-weight: 600; font-size: 0.82rem;
+      padding: 8px 14px; border-radius: 50px; display: flex; align-items: center; gap: 6px;
+      white-space: nowrap;
+    }
+    .status {
+      font-size: 0.7rem; font-weight: 600; padding: 4px 10px; border-radius: 20px;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .status.open { background: rgba(37,211,102,0.15); color: var(--green); }
+    .status.closed { background: rgba(230,57,46,0.18); color: #ff6b6b; }
+    .status-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+    .hamburger {
+      display: flex; flex-direction: column; gap: 5px; background: none; border: none;
+      cursor: pointer; padding: 6px;
+    }
+    .hamburger span { width: 22px; height: 2.5px; background: #fff; border-radius: 2px; }
+
+    .mobile-nav {
+      display: none; position: fixed; top: 60px; left: 0; right: 0;
+      background: #111; padding: 12px 16px 20px; z-index: 999;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .mobile-nav.show { display: flex; flex-direction: column; gap: 4px; }
+    .mobile-nav a {
+      padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-weight: 500;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 80px 0 40px;
+      background: linear-gradient(135deg, #1a0a0a 0%, #0d0d0d 50%, #1a1208 100%);
+    }
+    .hero-grid { display: grid; gap: 28px; align-items: center; }
+    .hero-text h1 {
+      font-size: 2.4rem; font-weight: 800; line-height: 1.12;
+      margin-bottom: 14px; letter-spacing: -0.8px;
+    }
+    .hero-text h1 .red { color: var(--red); }
+    .hero-text p {
+      color: var(--muted); font-size: 1rem; margin-bottom: 22px; max-width: 380px;
+    }
+    .hero-btns { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      height: 48px; border-radius: 50px; font-weight: 600; font-size: 0.95rem;
+      border: none; cursor: pointer;
+    }
+    .btn-green { background: var(--green); color: #fff; }
+    .btn-outline {
+      background: transparent; border: 1.5px solid rgba(255,255,255,0.3); color: #fff;
+    }
+    .hero-meta {
+      display: flex; flex-wrap: wrap; gap: 16px; font-size: 0.8rem; color: var(--muted);
+    }
+    .hero-meta strong { color: #fff; display: block; font-size: 0.9rem; }
+    .hero-img-wrap {
+      border-radius: 20px; overflow: hidden;
+      background: #1a1a1a; aspect-ratio: 4/3;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(145deg, #2a1515, #1a0a0a);
+    }
+    .hero-placeholder {
+      text-align: center; color: var(--muted); padding: 20px;
+    }
+    .hero-placeholder .emoji { font-size: 4rem; margin-bottom: 8px; }
+
+    /* FEATURED */
+    .featured { padding: 40px 0; background: #111; }
+    .section-title {
+      font-size: 1.5rem; font-weight: 800; text-align: center; margin-bottom: 8px;
+    }
+    .section-title span { color: var(--red); }
+    .section-sub {
+      text-align: center; color: var(--muted); margin-bottom: 28px; font-size: 0.95rem;
+    }
+    .feat-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    }
+    .feat-card {
+      background: var(--card); border-radius: var(--radius); overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .feat-img {
+      height: 100px; background: #222; display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem;
+    }
+    .feat-body { padding: 14px 12px 16px; text-align: center; }
+    .feat-body h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
+    .feat-body p { font-size: 0.75rem; color: var(--muted); margin-bottom: 8px; }
+    .feat-price {
+      display: inline-block; background: var(--red); color: #fff;
+      font-size: 0.75rem; font-weight: 700; padding: 3px 10px; border-radius: 6px;
+      margin-bottom: 10px;
+    }
+    .feat-btn {
+      display: block; width: 100%; height: 36px; border-radius: 20px;
+      border: 1.5px solid rgba(255,255,255,0.2); background: transparent;
+      color: #fff; font-size: 0.8rem; font-weight: 600; line-height: 36px;
+    }
+
+    /* MENU */
+    .menu-section { padding: 36px 0; }
+    .cat-title {
+      font-size: 1.2rem; font-weight: 800; color: var(--red);
+      margin: 32px 0 14px; display: flex; align-items: center; gap: 8px;
+      letter-spacing: -0.3px;
+    }
+    .product {
+      background: var(--card); border-radius: 14px; margin-bottom: 10px;
+      display: flex; gap: 14px; padding: 14px; align-items: center;
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    }
+    .product-img {
+      width: 72px; height: 72px; border-radius: 14px; flex-shrink: 0;
+      background: #2a2a2a; display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+    }
+    .product-info { flex: 1; min-width: 0; }
+    .product-info h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 3px; }
+    .product-info .desc { font-size: 0.75rem; color: var(--muted); margin-bottom: 8px; line-height: 1.35; }
+    .product-bottom { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .price { color: var(--red); font-weight: 800; font-size: 1.1rem; }
+    .badge {
+      display: inline-block; font-size: 0.62rem; font-weight: 700;
+      padding: 2px 7px; border-radius: 8px; margin-left: 6px;
+    }
+    .badge.popular { background: var(--red); color: #fff; }
+    .badge.special { background: #ff6b00; color: #fff; }
+    .add-btn {
+      height: 34px; padding: 0 14px; border-radius: 20px;
+      background: var(--green); color: #fff; border: none;
+      font-weight: 600; font-size: 0.8rem; cursor: pointer;
+      white-space: nowrap;
+    }
+
+    /* CONTACT */
+    .contact-section { padding: 30px 0; background: #111; }
+    .contact-card {
+      background: var(--card); border-radius: var(--radius); padding: 20px;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .contact-row {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.95rem;
+    }
+    .contact-row:last-child { border-bottom: none; }
+    .contact-row .icon { font-size: 1.3rem; width: 28px; text-align: center; }
+    .map-btn {
+      display: block; margin-top: 16px; text-align: center;
+      background: var(--green); color: #fff; height: 46px; line-height: 46px;
+      border-radius: 50px; font-weight: 700; font-size: 0.9rem;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 32px 16px; text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      background: #0a0a0a;
+    }
+    footer .brand { font-weight: 800; color: var(--red); font-size: 1.15rem; margin-bottom: 4px; }
+    footer p { color: var(--muted); font-size: 0.85rem; }
+    footer .copy { margin-top: 14px; font-size: 0.75rem; color: #555; }
+
+    /* CART BAR */
+    .cart-bar {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
+      background: #161616; border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 10px 16px; display: none;
+    }
+    .cart-bar.show { display: block; }
+    .cart-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    }
+    .cart-info { font-size: 0.85rem; }
+    .cart-info strong { color: var(--green); font-size: 1.1rem; }
+    .cart-btn {
+      background: var(--green); color: #fff; border: none;
+      height: 42px; padding: 0 20px; border-radius: 50px;
+      font-weight: 700; font-size: 0.85rem; cursor: pointer;
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.75);
+      z-index: 200; display: none; align-items: flex-end; justify-content: center;
+    }
+    .modal-overlay.show { display: flex; }
+    .modal {
+      background: #1a1a1a; width: 100%; max-width: 480px;
+      border-radius: 20px 20px 0 0; padding: 22px 16px 32px;
+      max-height: 85vh; overflow-y: auto;
+    }
+    .modal h3 { font-size: 1.2rem; margin-bottom: 14px; text-align: center; }
+    .cart-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.9rem;
+    }
+    .cart-item .remove {
+      background: none; border: none; color: var(--red);
+      font-size: 0.85rem; cursor: pointer; margin-left: 8px;
+    }
+    .cart-total {
+      display: flex; justify-content: space-between;
+      font-size: 1.15rem; font-weight: 700; margin: 16px 0;
+    }
+    .cart-total span:last-child { color: var(--green); }
+    .checkout-form {
+      margin: 12px 0 8px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .checkout-form label {
+      font-size: 0.75rem; color: var(--muted); font-weight: 600;
+      display: block; margin-bottom: 4px;
+    }
+    .checkout-form input,
+    .checkout-form select {
+      width: 100%; height: 44px; border-radius: 12px;
+      border: 1.5px solid rgba(255,255,255,0.12);
+      background: #111; color: #fff; padding: 0 14px; font-size: 0.95rem;
+    }
+    .form-error {
+      color: #ff6b6b; font-size: 0.8rem; display: none; margin-top: 4px;
+    }
+    .form-error.show { display: block; }
+    .modal-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+    .close-modal {
+      background: transparent; border: 1.5px solid rgba(255,255,255,0.2);
+      color: #fff; height: 44px; border-radius: 50px; font-weight: 600;
+      cursor: pointer; width: 100%;
+    }
+
+    /* DESKTOP */
+    @media (min-width: 768px) {
+      .nav { display: flex; }
+      .hamburger { display: none; }
+      .hero-grid { grid-template-columns: 1fr 1fr; }
+      .hero-btns { flex-direction: row; }
+      .feat-grid { grid-template-columns: repeat(4, 1fr); }
+      .product-img { width: 82px; height: 82px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <div class="logo-circle">ML</div>
+      <div class="logo-text">Muko<span>mani</span></div>
+    </a>
+    <nav class="nav">
+      <a href="#menu">Menu</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="header-right">
+      <div class="status open" id="statusBadge">
+        <span class="status-dot"></span>
+        <span id="statusText">Open</span>
+      </div>
+      <a href="https://wa.me/27739170871?text=Hi%20Mukomani%20%F0%9F%91%8B%20I%20want%20to%20order%20for%20collection%20please." class="wa-header" target="_blank">
+        💬 Order Now
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="#menu">Menu</a>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
+  <a href="https://wa.me/27739170871?text=Hi%20Mukomani%20%F0%9F%91%8B%20I%20want%20to%20order%20for%20collection%20please." target="_blank">Order on WhatsApp</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <h1>Hot Chicken.<br><span class="red">Loaded Sphatlo.</span></h1>
+        <p>Crispy wings, juicy chicken, proper sphatlo and fresh hake — cooked daily and ready for collection.</p>
+        <div class="hero-btns">
+          <a href="#menu" class="btn btn-green">See the Menu</a>
+          <a href="https://wa.me/27739170871?text=Hi%20Mukomani%20%F0%9F%91%8B%20I%20want%20to%20order%20for%20collection%20please." class="btn btn-outline" target="_blank">WhatsApp to Order</a>
+        </div>
+        <div class="hero-meta">
+          <div>
+            <strong>07:30 – 18:00</strong>
+            OPEN DAILY
+          </div>
+          <div>
+            <strong>Collection only</strong>
+            NO DELIVERY
+          </div>
+          <div>
+            <strong>073 917 0871</strong>
+            CALL OR WHATSAPP
+          </div>
+        </div>
+      </div>
+      <div class="hero-img-wrap">
+        <div class="hero-placeholder">
+          <div class="emoji">🍗🥖🐟</div>
+          <div>Mukomani<br>Cooked Fresh Daily</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED CATEGORIES -->
+<section class="featured">
+  <div class="container">
+    <h2 class="section-title">WHAT WE <span>SERVE</span></h2>
+    <p class="section-sub">Chicken, sphatlo, seafood and bakery — all made fresh.</p>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-img">🍗</div>
+        <div class="feat-body">
+          <h3>FAST FOOD</h3>
+          <p>Quarter, half, full chicken & wings</p>
+          <div class="feat-price">From R25</div>
+          <a href="#fastfood" class="feat-btn">SEE ITEMS →</a>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-img">🥖</div>
+        <div class="feat-body">
+          <h3>SPHATLO</h3>
+          <p>Atchaar, russian, vienna combos</p>
+          <div class="feat-price">From R22</div>
+          <a href="#sphatlo" class="feat-btn">SEE ITEMS →</a>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-img">🐟</div>
+        <div class="feat-body">
+          <h3>SEAFOOD</h3>
+          <p>Fried hake with or without chips</p>
+          <div class="feat-price">From R40</div>
+          <a href="#seafood" class="feat-btn">SEE ITEMS →</a>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-img">🍞</div>
+        <div class="feat-body">
+          <h3>BAKERY</h3>
+          <p>Soft rolls and fresh bread</p>
+          <div class="feat-price">From R15</div>
+          <a href="#bakery" class="feat-btn">SEE ITEMS →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FULL MENU -->
+<section class="menu-section" id="menu">
+  <div class="container">
+
+    <!-- FAST FOOD -->
+    <div class="cat-title" id="fastfood">🍗 Fast Food</div>
+
+    <div class="product" data-name="Quarter Chicken & Small Chips" data-price="55">
+      <div class="product-img">🍗</div>
+      <div class="product-info">
+        <h4>Quarter Chicken & Small Chips</h4>
+        <div class="product-bottom">
+          <span class="price">R55</span>
+          <button class="add-btn">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product" data-name="Quarter Chicken & Large Chips" data-price="65">
+      <div class="product-img">🍗</div>
+      <div class="product-info">
+        <h4>Quarter Chicken & Large Chips</h4>
+        <div class="product-bottom">
+          <span class="price">R65</span>
+          <button class="add-btn">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product" data-name="Quarter Chicken Only" data-price="25">
+      <div class="product-img">🍗</div>
+      <div class="product-info">
+        <h4>Quarter Chicken Only</h4>
+        <div class="product-bottom">
+          <span class="price">R25</span>
+          <button class="add-btn">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product" data-name="Half Chicken Only" data-price="45">
+      <div class="product-img">🍗</div>
+      <div class="product-info">
+        <h4>Half Chicken Only</h4>
+        <div class="product-bottom">
+          <span class="price">R45</span>
+          <button class="add-btn">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product" data-name="Full Chicken Only" data-price="85">
+      <div class="product-img">🍗</div>
+      <div class="product-info">
+        <h4>Full Chicken Only</h4>
+        <div class="product-bottom">
+          <span class="price">R85</span>
+          <button class="add-btn">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product" data-name="3 Wings & Large Chips" data-price="75">
+      <div class="product-img">🍗</div>
+      <div class="product-info">
+        <h4>3 Wings & Large Chips</h4>
+        <div class="product-bottom">
+          <span class="price">R75</span>
+          <button class="add-btn">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product" data-name="6 Wings & Large Chips" data-price="115">
+      <div class="product-img">🍗</div>
+      <div class="product-info">
+        <h4>6 Wings & Large Chips <span class="badge popular">POPULAR</span></h4>
+        <div class="product-bottom">
+          <span class="price">R115</span>
+          <button class="add-btn">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product" data-name="12 Wings & Large Chips" data-price="215">
+      <div class="product-img">🍗</div>
+      <div class="product-info">
+        <h4>12 Wings & Large Chips</h4>
+        <div class="product-bottom">
+          <span class="price">R215</span>
+          <button class="add-btn">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPHATLO -->
+    <div class="cat-title" id="sphatlo">🥖 Sphatlo</div>
+
+    <div class="product" data-name="Atchaar-Polony" data-price="22">
+      <div class="product-img">🥖</div>
+      <div class="product-info">
+        <h4>Atchaar-Polony</h4>
+        <div class="desc">Classic sphatlo with atchaar & polony</div>
+        <div class="product-bottom">
+          <span class="price">R22</span>
+          <button class="add-btn">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product" data-name="4 Ribs, Chips & 2 Eggs" data-price="52">
+      <div class="product-img">🥖</div>
+      <div class="product-info">
+        <h4>4 Ribs, Chips & 2 Eggs</h4>
+        <div class="product-bottom">
+          <span class="price">R52</span>
+          <button class="add-btn">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product" data-name="Special - 4 Ribs, Chips, 2 Eggs, Atchaar & Choice" data-price="208">
+      <div class="product-img">🥖</div>
+      <div class="product-info">
+        <h4>Special – 4 Ribs, Chips, 2 Eggs, Atchaar & Choice <span class="badge special">SPECIAL</span></h4>
+        <div class="product-bottom">
+          <span class="price">R208</span>
+          <button class="add-btn">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product" data-name="Atchaar Special + Cheese + Russian + Lettuce" data-price="40">
+      <div class="product-img">🥖</div>
+      <div class="product-info">
+        <h4>Atchaar Special + Cheese + Russian + Lettuce</h4>
+        <div class="desc">Atchaar special R60 · Cheese R10 · Russian · Lettuce</div>
+        <div class="product-bottom">
+          <span class="price">R40</span>
+          <button class="add-btn">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product" data-name="Vienna + Lettuce" data-price="30">
+      <div class="product-img">🥖</div>
+      <div class="product-info">
+        <h4>Vienna + Lettuce</h4>
+        <div class="product-bottom">
+          <span class="price">R30</span>
+          <button class="add-btn">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product" data-name="Half Russian-Vienna-Lettuce" data-price="35">
+      <div class="product-img">🥖</div>
+      <div class="product-info">
+        <h4>Half Russian-Vienna-Lettuce</h4>
+        <div class="product-bottom">
+          <span class="price">R35</span>
+          <button class="add-btn">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product" data-name="Russian-Vienna-Lettuce" data-price="40">
+      <div class="product-img">🥖</div>
+      <div class="product-info">
+        <h4>Russian-Vienna-Lettuce</h4>
+        <div class="product-bottom">
+          <span class="price">R40</span>
+          <button class="add-btn">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product" data-name="Atchaar Special + Cheese + Russian + Lettuce (2)" data-price="40">
+      <div class="product-img">🥖</div>
+      <div class="product-info">
+        <h4>Atchaar Special + Cheese + Russian + Lettuce</h4>
+        <div class="desc">Second combo option from menu</div>
+        <div class="product-bottom">
+          <span class="price">R40</span>
+          <button class="add-btn">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product" data-name="Small Chips Only" data-price="30">
+      <div class="product-img">🍟</div>
+      <div class="product-info">
+        <h4>Small Chips Only</h4>
+        <div class="product-bottom">
+          <span class="price">R30</span>
+          <button class="add-btn">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product" data-name="Large Chips Only" data-price="40">
+      <div class="product-img">🍟</div>
+      <div class="product-info">
+        <h4>Large Chips Only</h4>
+        <div class="product-bottom">
+          <span class="price">R40</span>
+          <button class="add-btn">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEAFOOD -->
+    <div class="cat-title" id="seafood">🐟 Seafood</div>
+
+    <div class="product" data-name="Hake & Small Chips" data-price="65">
+      <div class="product-img">🐟</div>
+      <div class="product-info">
+        <h4>Hake & Small Chips</h4>
+        <div class="product-bottom">
+          <span class="price">R65</span>
+          <button class="add-btn">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product" data-name="Hake & Large Chips" data-price="75">
+      <div class="product-img">🐟</div>
+      <div class="product-info">
+        <h4>Hake & Large Chips <span class="badge popular">POPULAR</span></h4>
+        <div class="product-bottom">
+          <span class="price">R75</span>
+          <button class="add-btn">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product" data-name="Hake Only" data-price="40">
+      <div class="product-img">🐟</div>
+      <div class="product-info">
+        <h4>Hake Only</h4>
+        <div class="product-bottom">
+          <span class="price">R40</span>
+          <button class="add-btn">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BAKERY -->
+    <div class="cat-title" id="bakery">🍞 Bakery</div>
+
+    <div class="product" data-name="Rolls" data-price="20">
+      <div class="product-img">🍞</div>
+      <div class="product-info">
+        <h4>Rolls</h4>
+        <div class="product-bottom">
+          <span class="price">R20</span>
+          <button class="add-btn">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product" data-name="Bread" data-price="15">
+      <div class="product-img">🍞</div>
+      <div class="product-info">
+        <h4>Bread</h4>
+        <div class="product-bottom">
+          <span class="price">R15</span>
+          <button class="add-btn">Add</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="contact-section" id="about">
+  <div class="container">
+    <h2 class="section-title">WHY <span>MUKOMANI</span></h2>
+    <p class="section-sub" style="margin-bottom: 20px;">Good food. Fair prices. Fast collection.</p>
+    <div class="contact-card" style="text-align: center;">
+      <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6;">
+        Mukomani is your local spot for proper chicken, loaded sphatlo, crispy hake and fresh bakery. Everything is prepared daily. Just WhatsApp your order, come collect when it’s ready, and pay on the spot. Simple.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact" style="background: var(--bg);">
+  <div class="container">
+    <h2 class="section-title">FIND <span>US</span></h2>
+    <div class="contact-card">
+      <div class="contact-row">
+        <span class="icon">📞</span>
+        <div>
+          <strong>073 917 0871</strong><br>
+          <span style="color:var(--muted);font-size:0.85rem;">Call or WhatsApp anytime</span>
+        </div>
+      </div>
+      <div class="contact-row">
+        <span class="icon">🕐</span>
+        <div>
+          <strong>07:30 – 18:00</strong><br>
+          <span style="color:var(--muted);font-size:0.85rem;">Open every day</span>
+        </div>
+      </div>
+      <div class="contact-row">
+        <span class="icon">📍</span>
+        <div>
+          <strong>Collection only</strong><br>
+          <span style="color:var(--muted);font-size:0.85rem;">Come fetch when ready</span>
+        </div>
+      </div>
+      <a href="https://maps.app.goo.gl/8neYe5YUngPT14Zv9?g_st=aw" class="map-btn" target="_blank">
+        📍 View on Google Maps
+      </a>
+      <a href="https://wa.me/27739170871?text=Hi%20Mukomani%20%F0%9F%91%8B%20I%20want%20to%20order%20for%20collection%20please." class="map-btn" style="background:var(--red);margin-top:10px;" target="_blank">
+        💬 WhatsApp Your Order
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="brand">Mukomani</div>
+  <p>Chicken • Sphatlo • Hake • Bakery</p>
+  <p class="copy">© 2026 Mukomani. Collection only.</p>
+</footer>
+
+<!-- CART BAR -->
+<div class="cart-bar" id="cartBar">
+  <div class="cart-inner">
+    <div class="cart-info">
+      <span id="cartCount">0 items</span> · <strong id="cartTotal">R0</strong>
+    </div>
+    <button class="cart-btn" id="viewCartBtn">View Order</button>
+  </div>
+</div>
+
+<!-- CART MODAL -->
+<div class="modal-overlay" id="cartModal">
+  <div class="modal">
+    <h3>Your Order</h3>
+    <div id="cartItems"></div>
+    <div class="cart-total">
+      <span>Total</span>
+      <span id="modalTotal">R0</span>
+    </div>
+
+    <div class="checkout-form">
+      <div>
+        <label for="custName">Your Name *</label>
+        <input type="text" id="custName" placeholder="Enter your name" required>
+      </div>
+      <div>
+        <label for="custPhone">Phone Number *</label>
+        <input type="tel" id="custPhone" placeholder="e.g. 073 123 4567" required>
+      </div>
+      <div>
+        <label for="custTime">Collection Time</label>
+        <select id="custTime">
+          <option value="As soon as ready">As soon as ready</option>
+          <option value="In 30 minutes">In 30 minutes</option>
+          <option value="In 1 hour">In 1 hour</option>
+          <option value="Later today">Later today</option>
+        </select>
+      </div>
+      <div class="form-error" id="formError">Please enter your name and phone number.</div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-green" id="whatsappOrderBtn" style="width:100%;height:48px;">
+        💬 Send Order on WhatsApp
+      </button>
+      <button class="close-modal" id="closeModal">Continue Browsing</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Mobile menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+  hamburger.addEventListener('click', () => {
+    mobileNav.classList.toggle('show');
+  });
+  document.querySelectorAll('.mobile-nav a').forEach(link => {
+    link.addEventListener('click', () => mobileNav.classList.remove('show'));
+  });
+
+  // Open / Closed status
+  function updateStatus() {
+    const now = new Date();
+    const time = now.getHours() * 60 + now.getMinutes();
+    const open = 7 * 60 + 30;  // 07:30
+    const close = 18 * 60;     // 18:00
+    const badge = document.getElementById('statusBadge');
+    const text = document.getElementById('statusText');
+    if (time >= open && time < close) {
+      badge.className = 'status open';
+      text.textContent = 'Open';
+    } else {
+      badge.className = 'status closed';
+      text.textContent = 'Closed';
+    }
+  }
+  updateStatus();
+  setInterval(updateStatus, 60000);
+
+  // Cart logic
+  let cart = [];
+
+  function addToCart(name, price) {
+    const existing = cart.find(i => i.name === name);
+    if (existing) existing.qty += 1;
+    else cart.push({ name, price, qty: 1 });
+    renderCart();
+  }
+
+  function removeFromCart(idx) {
+    cart.splice(idx, 1);
+    renderCart();
+  }
+
+  function getTotal() {
+    return cart.reduce((s, i) => s + i.price * i.qty, 0);
+  }
+
+  function getCount() {
+    return cart.reduce((s, i) => s + i.qty, 0);
+  }
+
+  function renderCart() {
+    const bar = document.getElementById('cartBar');
+    const count = getCount();
+    const total = getTotal();
+
+    if (count > 0) {
+      bar.classList.add('show');
+      document.getElementById('cartCount').textContent = count + (count === 1 ? ' item' : ' items');
+      document.getElementById('cartTotal').textContent = 'R' + total;
+    } else {
+      bar.classList.remove('show');
+    }
+
+    document.getElementById('cartItems').innerHTML = cart.map((i, idx) =>
+      `<div class="cart-item">
+        <span>${i.qty}× ${i.name}</span>
+        <span>R${i.price * i.qty}
+          <button class="remove" onclick="removeFromCart(${idx})">✕</button>
+        </span>
+      </div>`
+    ).join('');
+
+    document.getElementById('modalTotal').textContent = 'R' + total;
+  }
+
+  document.querySelectorAll('.add-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+      const p = this.closest('.product');
+      addToCart(p.dataset.name, parseInt(p.dataset.price));
+      this.textContent = 'Added ✓';
+      setTimeout(() => this.textContent = 'Add', 800);
+    });
+  });
+
+  document.getElementById('viewCartBtn').addEventListener('click', () => {
+    document.getElementById('formError').classList.remove('show');
+    document.getElementById('cartModal').classList.add('show');
+  });
+
+  document.getElementById('closeModal').addEventListener('click', () => {
+    document.getElementById('cartModal').classList.remove('show');
+  });
+
+  document.getElementById('cartModal').addEventListener('click', e => {
+    if (e.target.id === 'cartModal') {
+      document.getElementById('cartModal').classList.remove('show');
+    }
+  });
+
+  document.getElementById('whatsappOrderBtn').addEventListener('click', () => {
+    const name = (document.getElementById('custName').value || '').trim();
+    const phone = (document.getElementById('custPhone').value || '').trim();
+    const time = document.getElementById('custTime').value || 'As soon as ready';
+
+    if (!name || !phone) {
+      document.getElementById('formError').classList.add('show');
+      return;
+    }
+    document.getElementById('formError').classList.remove('show');
+    if (cart.length === 0) return;
+
+    let lines = [];
+    lines.push('MUKOMANI ORDER');
+    lines.push('────────────────');
+    lines.push('Name: ' + name);
+    lines.push('Phone: ' + phone);
+    lines.push('Collect: ' + time);
+    lines.push('────────────────');
+    lines.push('Items (' + getCount() + '):');
+    lines.push('');
+    cart.forEach((i, n) => {
+      lines.push((n + 1) + ') ' + i.qty + ' x ' + i.name + ' – R' + (i.price * i.qty));
+    });
+    lines.push('');
+    lines.push('────────────────');
+    lines.push('TOTAL: R' + getTotal());
+    lines.push('Pay on collection');
+    lines.push('────────────────');
+    lines.push('Please confirm. Thanks!');
+
+    const msg = encodeURIComponent(lines.join('\n'));
+    window.open('https://wa.me/27739170871?text=' + msg, '_blank');
+  });
+</script>
+</body>
+</html>
